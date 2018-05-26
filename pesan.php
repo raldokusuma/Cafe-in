@@ -1,7 +1,7 @@
 <?php
-include("_con.php");
-session_start();
 
+session_start();
+include("_con.php");
 $db_handle = new DBController();
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
@@ -41,7 +41,7 @@ switch($_GET["action"]) {
         }
     break;
     case "remove":
-        echo json_encode($_SESSION['sav_pid']);
+        // echo json_encode($_SESSION['sav_pid']);
         if(!empty($_SESSION["cart_item"])) {
             foreach($_SESSION["cart_item"] as $k => $v) {
                     if($_GET["product_id"] == $v["product_id"])
@@ -67,20 +67,15 @@ switch($_GET["action"]) {
 <head>
 
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/pesan.css">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:400,300,700" rel="stylesheet" type="text/css"/>
     <link href="https://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <title>Makan</title>
     <title>User Web</title>
 </head>
 <body>
-    <header>
-        <h3>data user</h3>
-    </header>
-
-    <nav>
-        <a href="login.html">registrasi</a>
-    </nav>
-    <div id="shopping-cart">
+    <div>
+       <div id="shopping-cart">
         <div class="txt-heading">Shopping Cart <a id="btnEmpty" href="pesan.php?action=empty">Empty Cart</a></div>
         <?php
             if(isset($_SESSION["cart_item"])){
@@ -89,18 +84,18 @@ switch($_GET["action"]) {
         <table cellpadding="10" cellspacing="1">
             <tbody>
                 <tr>
-                    <th style="text-align:left;"><strong>Name</strong></th>
-                    <th style="text-align:right;"><strong>Quantity</strong></th>
-                    <th style="text-align:right;"><strong>Price</strong></th>
-                    <th style="text-align:center;"><strong>Action</strong></th>
+                    <th style="text-align:left; color: black"><strong>Name</strong></th>
+                    <th style="text-align:right;color: black"><strong>Quantity</strong></th>
+                    <th style="text-align:right;color: black"><strong>Price</strong></th>
+                    <th style="text-align:center;color: black"><strong>Action</strong></th>
                 </tr>   
                 <?php       
                     foreach ($_SESSION["cart_item"] as $item){
                 ?>
                 <tr>
-                    <td style="text-align:left;border-bottom:#F0F0F0 1px solid;"><strong><?php echo $item["name"]; ?></strong></td>
-                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo $item["quantity"]; ?></td>
-                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo "$".$item["price"]; ?></td>
+                    <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["name"]; ?></strong></td>
+                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["quantity"]; ?></td>
+                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo "$".$item["price"]; ?></td>
                     <td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href="pesan.php?action=remove&product_id=<?php echo $item["product_id"]; ?>" class="btnRemoveAction">Remove Item</a></td>
                 </tr>
                     <?php
@@ -108,17 +103,19 @@ switch($_GET["action"]) {
                         }
                     ?>
                 <tr>
-                    <td colspan="5" align=right><strong>Total:</strong> <?php echo "$".$item_total; ?></td>
+                    <td colspan="5" align=right style="color: black"><strong style="color: black">Total:</strong> <?php echo "$".$item_total; ?></td>
                 </tr>
+
             </tbody>
         </table>        
         <?php
             }
         ?>
+        <a href="sp_order.php">Pesan</a>
     </div>
     <br>
     <div id="product-grid">
-        <div class="txt-heading">Products</div>
+        <div class="txt-heading" >Products</div>
         <?php
             $product_array = $db_handle->runQuery("SELECT * FROM tbl_product ORDER BY product_id ASC");
             if (!empty($product_array)) { 
@@ -126,7 +123,8 @@ switch($_GET["action"]) {
         ?>
         <div class="product-item">
             <form method="post" action="pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
-            <div><strong><?php echo $product_array[$key]["Nama"]; ?></strong></div>
+            <div class="product-image"><img src="img/<?php echo $product_array[$key]["Nama"];?>.jpg"></div>
+            <div><strong style="color: black"><?php echo $product_array[$key]["Nama"]; ?></strong></div>
             <div class="product-price"><?php echo "$".$product_array[$key]["price"]; ?></div>
             <div><input type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" /></div>
             </form>
@@ -135,6 +133,8 @@ switch($_GET["action"]) {
             }
         }
         ?>
+    </div> 
     </div>
+    
     </body>
 </html>

@@ -12,8 +12,15 @@
       
       if($row[0] == 1) {
         	$_SESSION['login_user'] = $myusername;
+          $_SESSION['login_user'] = $myusername;
         	header("location: pesan.php");
-      }else {
+      }
+      else if ($row[0] == 5) {
+          $_SESSION['login_user'] = $myusername;
+          $_SESSION['login_user'] = $myusername;
+          header("location: admin.php");
+      }
+      else {
          	$error = "Your Login Name or Password is invalid";
       }
    }
