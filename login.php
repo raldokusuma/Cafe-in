@@ -18,7 +18,7 @@
       else if ($row[0] == 5) {
           $_SESSION['login_user'] = $myusername;
           $_SESSION['login_user'] = $myusername;
-          header("location: admin.php");
+          header("location: listpesan.php");
       }
       else {
          	$error = "Your Login Name or Password is invalid";

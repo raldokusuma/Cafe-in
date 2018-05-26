@@ -29,7 +29,7 @@
     <tbody>
 
         <?php
-         include("_con.php");
+         include("_con2.php");
         $sql = "SELECT * FROM tbl_product";
         $query = mysqli_query($con, $sql);
 

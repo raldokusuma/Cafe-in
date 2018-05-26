@@ -74,66 +74,88 @@ switch($_GET["action"]) {
     <title>User Web</title>
 </head>
 <body>
-    <div>
-       <div id="shopping-cart">
-        <div class="txt-heading">Shopping Cart <a id="btnEmpty" href="pesan.php?action=empty">Empty Cart</a></div>
-        <?php
-            if(isset($_SESSION["cart_item"])){
-            $item_total = 0;
-        ?>  
-        <table cellpadding="10" cellspacing="1">
-            <tbody>
-                <tr>
-                    <th style="text-align:left; color: black"><strong>Name</strong></th>
-                    <th style="text-align:right;color: black"><strong>Quantity</strong></th>
-                    <th style="text-align:right;color: black"><strong>Price</strong></th>
-                    <th style="text-align:center;color: black"><strong>Action</strong></th>
-                </tr>   
-                <?php       
-                    foreach ($_SESSION["cart_item"] as $item){
-                ?>
-                <tr>
-                    <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["name"]; ?></strong></td>
-                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["quantity"]; ?></td>
-                    <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo "$".$item["price"]; ?></td>
-                    <td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href="pesan.php?action=remove&product_id=<?php echo $item["product_id"]; ?>" class="btnRemoveAction">Remove Item</a></td>
-                </tr>
-                    <?php
-                        $item_total += ($item["price"]*$item["quantity"]);
-                        }
-                    ?>
-                <tr>
-                    <td colspan="5" align=right style="color: black"><strong style="color: black">Total:</strong> <?php echo "$".$item_total; ?></td>
-                </tr>
-
-            </tbody>
-        </table>        
-        <?php
+    <div style="width: 100%;">
+        <div id="product-grid" style="width: 45%; float: left; padding: 20px;">
+            <ul><li class="allmenu"><a href="pesan.php">All Menu</a></li></ul>
+            <ul>
+                <li class="menu"><a class="active" href="pesan.php?view=v_acai">Acai</a></li>
+                <li class="menu"><a href="pesan.php?view=v_blended">Blended</a></li>
+                <li class="menu"><a href="pesan.php?view=v_coffee">Coffee</a></li>
+                <li class="menu"><a href="pesan.php?view=v_others">Others</a></li>
+                <li class="menu"><a href="pesan.php?view=v_pasta">Pasta</a></li>
+                <li class="menu"><a href="pesan.php?view=v_rice">Rice</a></li>
+                <li class="menu"><a href="pesan.php?view=v_sharedbites">Shared Bites</a></li>
+                <li class="menu"><a href="pesan.php?view=v_sweet">Sweet</a></li>
+                <li class="menu"><a href="pesan.php?view=v_tea">Tea</a></li>
+                <li class="menu"><a href="pesan.php?view=v_topdrinks">Topping for Drinks</a></li>
+                <li class="menu"><a href="pesan.php?view=v_topfood">Topping for Foods</a></li>
+                <li class="menu"><a href="pesan.php?view=v_western">Western</a></li>
+            </ul>
+            <?php
+                include '_con2.php';
+                if (isset($_GET['view'])) {
+                    $product_array = $db_handle->runQuery("SELECT * FROM `".$_GET['view']."`");
+                    // $querya = "SELECT * FROM v_acai";
+                    // $view = mysqli_query($con, $querya);
+                    // $product_array = mysqli_fetch_array($view);
+                }
+                else {
+                    $product_array = $db_handle->runQuery("SELECT * FROM tbl_product ORDER BY product_id ASC");
+                }
+                if (!empty($product_array)) { 
+                foreach($product_array as $key=>$value){
+            ?>
+            <div class="product-item" style="position: relative;">
+                <form method="post" action="pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
+                <!-- <div class="product-image"><img src="img/<?php echo $product_array[$key]["Nama"];?>.jpg"></div> -->
+                <div><strong style="color: black"><?php echo $product_array[$key]["Nama"]; ?></strong></div>
+                <div class="product-price"><?php echo "$".$product_array[$key]["price"]; ?></div>
+                <div style="bottom: 5px; margin-left: 30px; position: absolute; "><input type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" /></div>
+                </form>
+            </div>
+            <?php
+                }
             }
-        ?>
-        <a href="sp_order.php">Pesan</a>
-    </div>
-    <br>
-    <div id="product-grid">
-        <div class="txt-heading" >Products</div>
-        <?php
-            $product_array = $db_handle->runQuery("SELECT * FROM tbl_product ORDER BY product_id ASC");
-            if (!empty($product_array)) { 
-            foreach($product_array as $key=>$value){
-        ?>
-        <div class="product-item">
-            <form method="post" action="pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
-            <div class="product-image"><img src="img/<?php echo $product_array[$key]["Nama"];?>.jpg"></div>
-            <div><strong style="color: black"><?php echo $product_array[$key]["Nama"]; ?></strong></div>
-            <div class="product-price"><?php echo "$".$product_array[$key]["price"]; ?></div>
-            <div><input type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" /></div>
-            </form>
+            ?>
         </div>
-        <?php
-            }
-        }
-        ?>
-    </div> 
+        <div id="shopping-cart" style="width: 45%; float: right; padding: 20px;">
+            <div class="txt-heading">Shopping Cart <a id="btnEmpty" href="sp_order.php">Pesan</a><a id="btnEmpty" href="pesan.php?action=empty">Empty Cart</a></div>
+            <?php
+                if(isset($_SESSION["cart_item"])){
+                $item_total = 0;
+            ?>  
+            <table cellpadding="10" cellspacing="1">
+                <tbody>
+                    <tr>
+                        <th style="text-align:left; color: black"><strong>Name</strong></th>
+                        <th style="text-align:right;color: black"><strong>Quantity</strong></th>
+                        <th style="text-align:right;color: black"><strong>Price</strong></th>
+                        <th style="text-align:center;color: black"><strong>Action</strong></th>
+                    </tr>   
+                    <?php       
+                        foreach ($_SESSION["cart_item"] as $item){
+                    ?>
+                    <tr>
+                        <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["name"]; ?></strong></td>
+                        <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["quantity"]; ?></td>
+                        <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo "$".$item["price"]; ?></td>
+                        <td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href="pesan.php?action=remove&product_id=<?php echo $item["product_id"]; ?>" class="btnRemoveAction">Remove Item</a></td>
+                    </tr>
+                        <?php
+                            $item_total += ($item["price"]*$item["quantity"]);
+                            }
+                        ?>
+                    <tr>
+                        <td colspan="5" align=right style="color: black"><strong style="color: black">Total:</strong> <?php echo "$".$item_total; ?></td>
+                    </tr>
+
+                </tbody>
+            </table>        
+            <?php
+                }
+            ?>
+        </div>
+     
     </div>
     
     </body>

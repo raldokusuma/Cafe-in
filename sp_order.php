@@ -22,7 +22,7 @@ if( isset($_SESSION['login_user']) ){
     $oid = mysqli_fetch_array($order_id);
 
     // apakah query hapus berhasil?
-    if( $query ){
+    if($query){
 		// echo json_encode($_SESSION["cart_item"][]["name"]);
         $i=0;
         while(!empty($_SESSION["cart_item"][$i])) { 
@@ -35,5 +35,7 @@ if( isset($_SESSION['login_user']) ){
         }
         unset($_SESSION["cart_item"]);
         unset($_SESSION["sav_pid"]);
-        header("location: pemesanan.php?");
+        header("location: pemesanan.php?order_id=$oid[0]");
+    }
+}
 ?>
