@@ -1,9 +1,8 @@
 <?php
-   include("_con.php");
+   include("_con2.php");
    session_start();
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      
       $myusername = mysqli_real_escape_string($con,$_POST['namaq']);
       $mypassword = mysqli_real_escape_string($con,$_POST['passq']); 
       	
@@ -13,7 +12,7 @@
       
       if($row[0] == 1) {
         	$_SESSION['login_user'] = $myusername;
-        	header("location: welcome.php");
+        	header("location: pesan.php");
       }else {
          	$error = "Your Login Name or Password is invalid";
       }

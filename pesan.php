@@ -1,76 +1,64 @@
 <?php
+include("_con.php");
 session_start();
-// require_once("_con.php");
-class DBControllersss {
-    private $host = "10.151.253.191";
-    private $user = "khaw";
-    private $password = "khaw";
-    private $database = "fp_mbd";
-    private $conn;
-    
-    function __construct() {
-        $this->conn = $this->connectDB();
-    }
-    
-    function connectDB() {
-        $conn = mysqli_connect($this->host,$this->user,$this->password,$this->database);
-        return $conn;
-    }
-    
-    function runQuery($query) {
-        $result = mysqli_query($this->conn,$query);
-        while($row=mysqli_fetch_assoc($result)) {
-            $resultset[] = $row;
-        }       
-        if(!empty($resultset))
-            return $resultset;
-    }
-    
-    function numRows($query) {
-        $result  = mysqli_query($this->conn,$query);
-        $rowcount = mysqli_num_rows($result);
-        return $rowcount;   
-    }
-    }
-$db_handle = new DBControllersss();
+
+$db_handle = new DBController();
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
     case "add":
         if(!empty($_POST["quantity"])) {
             $productById = $db_handle->runQuery("SELECT * FROM tbl_product WHERE product_id='" . $_GET["product_id"] . "'");
-            echo $_GET["product_id"];
-            $itemArray = array($productById[0]["product_id"]=>array('product_id'=>$productById[0]["product_id"],'name'=>$productById[0]["Nama"], 'quantity'=>$_POST["quantity"], 'price'=>$productById[0]["price"]));
+            // echo json_encode($productById) ;
+            // echo "\n";
+            $itemArray = array($productById[0]["product_id"] =>array('product_id'=>$productById[0]["product_id"],'name'=>$productById[0]["Nama"], 'quantity'=>$_POST["quantity"], 'price'=>$productById[0]["price"]));
             
             if(!empty($_SESSION["cart_item"])) {
-                if(in_array($productById[0]["product_id"],array_keys($_SESSION["cart_item"]))) {
+                //echo json_encode($_SESSION['sav_pid']);
+                if(in_array($productById[0]["product_id"],$_SESSION['sav_pid'])) 
+                    
+                    {
+                    //echo json_encode(array_keys($_SESSION["cart_item"]));
                     foreach($_SESSION["cart_item"] as $k => $v) {
-                            if($productById[0]["product_id"] == $k) {
-                                if(empty($_SESSION["cart_item"][$k]["quantity"])) {
+                            if($productById[0]["product_id"]  == $v["product_id"]) {
+                                if(empty($_SESSION["cart_item"][$k]["quantity"])){
                                     $_SESSION["cart_item"][$k]["quantity"] = 0;
-                                }
+                                    }
                                 $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
                             }
                     }
                 } else {
-                    $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+
+                    $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray); 
+                    array_push($_SESSION['sav_pid'],$productById[0]["product_id"]);
+                    //echo json_encode($_SESSION["cart_item"]) ;
                 }
             } else {
                 $_SESSION["cart_item"] = $itemArray;
+                $_SESSION['sav_pid'] = array();
+                array_push($_SESSION['sav_pid'],$productById[0]["product_id"]);
             }
+            
         }
     break;
     case "remove":
+        echo json_encode($_SESSION['sav_pid']);
         if(!empty($_SESSION["cart_item"])) {
             foreach($_SESSION["cart_item"] as $k => $v) {
-                    if($_GET["product_id"] == $k)
-                        unset($_SESSION["cart_item"][$k]);              
+                    if($_GET["product_id"] == $v["product_id"])
+                        unset($_SESSION["cart_item"][$k]);        
                     if(empty($_SESSION["cart_item"]))
                         unset($_SESSION["cart_item"]);
+                        //unset($_SESSION["sav_pid"]);
+            }
+            foreach ($_SESSION['sav_pid'] as $key => $value) {
+                if($_GET["product_id"]==$value)
+                    unset($_SESSION['sav_pid'][$key]);
             }
         }
     break;
     case "empty":
         unset($_SESSION["cart_item"]);
+        unset($_SESSION["sav_pid"]);
     break;  
 }
 }
@@ -113,7 +101,7 @@ switch($_GET["action"]) {
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid;"><strong><?php echo $item["name"]; ?></strong></td>
                     <td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo $item["quantity"]; ?></td>
                     <td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo "$".$item["price"]; ?></td>
-                    <td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href=pesan.php?action=remove&product_id=<?php echo $item["product_id"]; ?>" class="btnRemoveAction">Remove Item</a></td>
+                    <td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href="pesan.php?action=remove&product_id=<?php echo $item["product_id"]; ?>" class="btnRemoveAction">Remove Item</a></td>
                 </tr>
                     <?php
                         $item_total += ($item["price"]*$item["quantity"]);
@@ -128,9 +116,7 @@ switch($_GET["action"]) {
             }
         ?>
     </div>
-
     <br>
-
     <div id="product-grid">
         <div class="txt-heading">Products</div>
         <?php
@@ -139,7 +125,7 @@ switch($_GET["action"]) {
             foreach($product_array as $key=>$value){
         ?>
         <div class="product-item">
-            <form method="post" action=pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
+            <form method="post" action="pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
             <div><strong><?php echo $product_array[$key]["Nama"]; ?></strong></div>
             <div class="product-price"><?php echo "$".$product_array[$key]["price"]; ?></div>
             <div><input type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" /></div>
@@ -150,43 +136,5 @@ switch($_GET["action"]) {
         }
         ?>
     </div>
-    <table border="1">
-    <thead>
-        <tr>
-            <th>product_id</th>
-            <th>Nama</th>
-            <th>price</th>
-            <th>Jenis</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <?php
-        include("_con.php");
-        $sql = "SELECT * FROM tbl_product";
-        $query = mysqli_query($con, $sql);
-
-        while($user = mysqli_fetch_array($query)){
-            echo "<tr>";
-
-            echo "<td>".$user['product_id']."</td>";
-            echo "<td>".$user['Nama']."</td>";
-            echo "<td>".$user['price']."</td>";
-            echo "<td>".$user['Jenis']."</td>";
-            echo "<td>";
-            echo "<a href='pesan.php?product_id=".$user['product_id']."'>Pesan</a>";
-            echo "</td>";   
-            echo "</tr>";
-        }
-        ?>
-
-    </tbody>
-    </table>
-<?php
-    $chart=$_SESSION['chart'];
-    print_r($chart);
-    ?>
-    <p>Total: <?php echo mysqli_num_rows($query) ?></p>
-
     </body>
 </html>
