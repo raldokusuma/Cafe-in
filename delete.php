@@ -1,26 +1,27 @@
 <?php
+include("_con2.php");
+// cek apakah tombol simpan sudah diklik atau blum?
+if(isset($_GET['product_id'])){
 
-$con = mysqli_connect('localhost','root','');
-mysqli_select_db($con,'fp_mbd');
-
-if( isset($_GET['product_id']) ){
-
-    // ambil id dari query string
+    // ambil data dari formulir
     $id = $_GET['product_id'];
-
-    // buat query hapus
+    // buat query update
+    echo $id;
     $sql = "DELETE FROM tbl_product WHERE product_id=$id";
     $query = mysqli_query($con, $sql);
 
-    // apakah query hapus berhasil?
-    if( $query ){
+    // apakah query update berhasil?
+    if( $query ) {
+        // kalau berhasil alihkan ke halaman list-siswa.php
         header('Location: user.php');
     } else {
-        die("gagal menghapus...");
+        // kalau gagal tampilkan pesan
+        die("Gagal menyimpan perubahan...");
     }
 
+
 } else {
-    die("akses dilarang...");
+    die("Akses dilarang...");
 }
 
 ?>
