@@ -8,7 +8,6 @@ $.ajax({url: "byr-re.php", success: function(result){
    	    $("#theb").html("");
    	    for (var i = data.length - 1; i >= 0; i--) {
           total = data[i].quantity*data[i].price;
-
    	    	var dom='<tr>\
           <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black">'+data[i].order_id+'</td>\
                     <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black">'+data[i].person_id+'</td>\
