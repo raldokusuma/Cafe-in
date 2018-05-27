@@ -17,6 +17,7 @@ a.btnRemoveAction{
     font-size:0.9em;
     text-decoration: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 /*a.btnRemoveAction:visited{color:#D60202;border:0;padding:2px 10px;font-size:0.9em;}*/
 
@@ -29,6 +30,7 @@ a.btnRemoveAction{
     float: right;
     text-decoration: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 .btnAddAction{
     background-color: #eb9e4f;
@@ -37,6 +39,7 @@ a.btnRemoveAction{
     color: #ffffff;
     margin-left: 2px;
     border-radius: 4px;
+    cursor: pointer;
 }
 #shopping-cart {margin-bottom:30px;}
 .cart-item {border-bottom: #79b946 1px dotted;padding: 10px;}

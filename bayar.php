@@ -4,7 +4,7 @@
     $pid=$_GET['product_id'];
     echo $pid;
     echo $idd;
-    $queryc = "CALL sp_ubahstat('$idd','$pid','Dibayar')";
+    $queryc = "CALL sp_ubahstat('$idd','$pid','dibayar')";
     $pemesanan = mysqli_query($con, $queryc);
     $masak = mysqli_fetch_array($pemesanan); 
     if ($masak[0]=1) {

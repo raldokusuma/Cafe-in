@@ -39,8 +39,8 @@ if( isset($_SESSION['login_user']) ){
         	$i++;
         }
 
-        // unset($_SESSION["cart_item"]);
-        // unset($_SESSION["sav_pid"]);
+        unset($_SESSION["cart_item"]);
+        unset($_SESSION["sav_pid"]);
         // header("location: sp_order.php");
         header("location: pemesanan.php?order_id=$oid[0]");
     }

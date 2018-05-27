@@ -44,10 +44,16 @@
                     array_push($check_stat, $item["status"]);
 
                     }
-                    if (!in_array("dipesan", $check_stat) && !in_array("dimasak", $check_stat)) {
+                    if (!in_array("dipesan", $check_stat) && !in_array("dimasak", $check_stat) && !in_array("disajikan", $check_stat)) {
                      	
                      ?>
-                     <a href="pesan.php" style="color: white;">Pesan Lagi</a>
+
+                     <tr>
+                        <td></td><td></td><td></td><td></td>
+                        <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black; "><a id="btnEmpty" href="pesan.php" class="btnRemoveAction">Pesan Lagi</a></td>
+                    </tr>
+                     
+                     
 
                      <?php  
 						}
