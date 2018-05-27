@@ -31,8 +31,8 @@
                     foreach($pemesanan as $item){
                 ?>
                 <tr>	
-                	<meta http-equiv="refresh" content="5">
-                	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["order_date"]; ?></td>
+<!--                 	<meta http-equiv="refresh" content="5">
+ -->                	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["order_date"]; ?></td>
                 	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["person_id"]; ?></td>
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["Nama"]; ?></strong></td>
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["quantity"]; ?></strong></td>

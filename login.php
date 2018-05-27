@@ -60,15 +60,22 @@
           <p style="color: black"><strong>Pembeli</strong></p>
           <p>Sebagai pembeli gunakan user meja1 - meja7 dan password sama dengan usernya</p>
 
+
       </div>
       <div class="col-sm-3">
           <p style="color: black"><strong>Pelayan</strong></p>
+          <p>Untuk Pelayan gunakan username: pelayan dan password : pelayan.</p>
+          <p>User pelayan mampu memverifikasi bahwa pesanan telah disajikan</p>
       </div>
       <div class="col-sm-3">
           <p style="color: black"><strong>Koki</strong></p>
+          <p>Untuk Koki gunakan username: koki dan password : koki</p>
+          <p>User koki mampu memverivikasi bahwa pesanan telah dibuat</p>
       </div>
       <div class="col-sm-3">
           <p style="color: black"><strong>Kasir</strong></p>
+          <p>Untuk kasir gunakan username: kasir dan password: kasir</p>
+          <p>User kasir mampu memverivikasi bahwa pembeli telah membayar pesanannya</p>
       </div>
     </div>
   </div>
