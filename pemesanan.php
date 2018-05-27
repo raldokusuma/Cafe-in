@@ -1,3 +1,4 @@
+
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
@@ -18,16 +19,19 @@
                     <th style="text-align:center;color: black"><strong>Status</strong></th>
                 </tr>   
                 <?php
+                $check_stat=array();
                 	include("_con2.php");
                 	$idd=$_GET['order_id'];
                 ?>
-                	<div class="txt-heading">Pesanan <a id="btnEmpty" href="bayar.php?order_id=<?php echo $idd; ?>">Bayar</a></div>
+                	<div class="txt-heading">Pesanan Anda</div>
                 <?php
                 	$queryc = "CALL sp_lihatpesan('$idd')";
     				$pemesanan = mysqli_query($con, $queryc);       
-                    foreach ($pemesanan as $item){
+ 					 
+                    foreach($pemesanan as $item){
                 ?>
-                <tr>
+                <tr>	
+                	<meta http-equiv="refresh" content="5">
                 	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["order_date"]; ?></td>
                 	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["person_id"]; ?></td>
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["Nama"]; ?></strong></td>
@@ -35,8 +39,19 @@
                     <td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["status"]; ?></td>
                 </tr>
                     <?php
-                        }
-                    ?>
+                    array_push($check_stat, $item["status"]);
+
+                    }
+                    if (!in_array("dipesan", $check_stat) && !in_array("dimasak", $check_stat)) {
+                     	
+                     ?>
+                     <a href="pesan.php" style="color: white;">Pesan Lagi</a>
+
+                     <?php  
+						}
+                     ?>
+                      
+                    
             </tbody>
         </table>
     </div>
