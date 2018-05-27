@@ -61,26 +61,30 @@
     <p style="color: black; text-align: center;"><strong style="font-size: 30px">Cafe-in v1.0 Tutorial</strong></p>
     <br>
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-6">
           <p style="color: black"><strong>Pembeli</strong></p>
           <p>Sebagai pembeli gunakan user meja1 - meja7 dan password sama dengan usernya</p>
-
-
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-6">
           <p style="color: black"><strong>Pelayan</strong></p>
           <p>Untuk Pelayan gunakan username: pelayan dan password : pelayan.</p>
           <p>User pelayan mampu memverifikasi bahwa pesanan telah disajikan</p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-6">
           <p style="color: black"><strong>Koki</strong></p>
           <p>Untuk Koki gunakan username: koki dan password : koki</p>
           <p>User koki mampu memverivikasi bahwa pesanan telah dibuat</p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-6">
           <p style="color: black"><strong>Kasir</strong></p>
           <p>Untuk kasir gunakan username: kasir dan password: kasir</p>
           <p>User kasir mampu memverivikasi bahwa pembeli telah membayar pesanannya</p>
+      </div>
+      <br>
+      <div class="col-sm-12">
+          <p style="color: black"><strong>Admin</strong></p>
+          <p>Untuk admin gunakan username: admin dan password: admin</p>
+          <p>User admin mampu mengubah menu dan harga</p>
       </div>
     </div>
   </div>
