@@ -38,11 +38,42 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/tutorial.css">
 	<link href="https://fonts.googleapis.com/css?family=Oxygen:400,300,700" rel="stylesheet" type="text/css"/>
-    <link href="https://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
-	<title>Makan</title>
+  <link href="https://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Makan</title>
 </head>
 <body>
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+
+    <span class="close">&times;</span>
+    <p style="color: black; text-align: center;"><strong style="font-size: 30px">Cafe-in v1.0 Tutorial</strong></p>
+    <br>
+    <div class="row">
+      <div class="col-sm-3">
+          <p style="color: black"><strong>Pembeli</strong></p>
+          <p>Sebagai pembeli gunakan user meja1 - meja7 dan password sama dengan usernya</p>
+
+      </div>
+      <div class="col-sm-3">
+          <p style="color: black"><strong>Pelayan</strong></p>
+      </div>
+      <div class="col-sm-3">
+          <p style="color: black"><strong>Koki</strong></p>
+      </div>
+      <div class="col-sm-3">
+          <p style="color: black"><strong>Kasir</strong></p>
+      </div>
+    </div>
+  </div>
+
+</div>
 <div class="signin cf">
   <div class="avatar"></div>
   <form method="POST" action="">
@@ -58,7 +89,7 @@
   </form>
 </div>
 </div>
-  
+  <script type="text/javascript" src="js/tutorial.js" ></script>
 </body>
 </html>
   
