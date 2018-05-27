@@ -1,7 +1,7 @@
 <?php
-   include("_con2.php");
-   session_start();
    
+   session_start();
+   include("_con2.php");
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       $myusername = mysqli_real_escape_string($con,$_POST['namaq']);
       $mypassword = mysqli_real_escape_string($con,$_POST['passq']); 
@@ -29,6 +29,11 @@
           $_SESSION['login_user'] = $myusername;
           $_SESSION['login_user'] = $myusername;
           header("location: listpembayaran.php");
+      }
+      else if ($row[0] == 8) {
+          $_SESSION['login_user'] = $myusername;
+          $_SESSION['login_user'] = $myusername;
+          header("location: admin.php");
       }
       else {
          	$error = "Your Login Name or Password is invalid";

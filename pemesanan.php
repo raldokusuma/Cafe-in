@@ -10,14 +10,16 @@
 <body>
 	<div id="shopping-cart" style="width: 45%; float: left; padding: 20px;">
         <table cellpadding="10" cellspacing="1">
-            <tbody>
+            <thead>
                 <tr>
                 	<th style="text-align:right;color: black"><strong>Order Date</strong></th>
                 	<th style="text-align:right;color: black"><strong>Meja</strong></th>
                     <th style="text-align:left; color: black"><strong>Nama</strong></th>
                     <th style="text-align:left; color: black"><strong>Jumlah</strong></th>
                     <th style="text-align:center;color: black"><strong>Status</strong></th>
-                </tr>   
+                </tr>
+            </thead> 
+                <tbody id="theb">  
                 <?php
                 $check_stat=array();
                 	include("_con2.php");
@@ -31,8 +33,8 @@
                     foreach($pemesanan as $item){
                 ?>
                 <tr>	
-<!--                 	<meta http-equiv="refresh" content="5">
- -->                	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["order_date"]; ?></td>
+                	<meta http-equiv="refresh" content="5">
+                	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["order_date"]; ?></td>
                 	<td style="text-align:right;border-bottom:#F0F0F0 1px solid; color: black"><?php echo $item["person_id"]; ?></td>
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["Nama"]; ?></strong></td>
                     <td style="text-align:left;border-bottom:#F0F0F0 1px solid; color: black"><strong><?php echo $item["quantity"]; ?></strong></td>

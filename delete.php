@@ -13,7 +13,7 @@ if(isset($_GET['product_id'])){
     // apakah query update berhasil?
     if( $query ) {
         // kalau berhasil alihkan ke halaman list-siswa.php
-        header('Location: user.php');
+        header('Location: admin.php');
     } else {
         // kalau gagal tampilkan pesan
         die("Gagal menyimpan perubahan...");
