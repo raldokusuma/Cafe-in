@@ -13,7 +13,7 @@
       if($row[0] == 1) {
         	$_SESSION['login_user'] = $myusername;
           $_SESSION['login_user'] = $myusername;
-        	header("location: pesan.php");
+        	header("location: rumahmakan.php");
       }
       else if ($row[0] == 5) {
           $_SESSION['login_user'] = $myusername;
