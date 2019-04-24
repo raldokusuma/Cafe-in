@@ -94,7 +94,7 @@ switch($_GET["action"]) {
                 <form method="post" action="pesan.php?action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
                 <!-- <div class="product-image"><img src="img/<?php echo $product_array[$key]["Nama"];?>.jpg"></div> -->
                 <div><strong style="color: black"><?php echo $product_array[$key]["nama_rumahmakan"]; ?></strong></div>
-                <!-- <div class="product-price"><?php echo "Rp ".$product_array[$key]["price"];?>rb</div> -->
+                <div class="jarak"><?php echo "Jarak ".$product_array[$key]["jarak_rumahmakan"];?>km</div>
                 <!-- <div style="bottom: 5px; margin-left: 30px; position: absolute; "><input type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" /></div> -->
                 <div style="bottom: 5px; margin-left: 40%; position: absolute; ">
                 	<button class="btn btn-primary">Pilih</button>

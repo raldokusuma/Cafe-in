@@ -130,6 +130,7 @@ DROP TABLE IF EXISTS `tbl_rumahmakan`;
 CREATE TABLE `tbl_rumahmakan` (
   `id_rumahmakan` int(11) NOT NULL AUTO_INCREMENT,
   `nama_rumahmakan` varchar(45) DEFAULT NULL,
+  `jarak_rumahmakan` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id_rumahmakan`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,7 +141,7 @@ CREATE TABLE `tbl_rumahmakan` (
 
 LOCK TABLES `tbl_rumahmakan` WRITE;
 /*!40000 ALTER TABLE `tbl_rumahmakan` DISABLE KEYS */;
-INSERT INTO `tbl_rumahmakan` VALUES (1,'RM Sederhana'),(2,'Mak Ni'),(3,'RM Goyang Lidah'),(4,'J ONE'),(5,'RM Cahaya'),(6,'Warung Kampus'),(7,'Warung Gang 3'),(8,'Warung Abah');
+INSERT INTO `tbl_rumahmakan` VALUES (1,'RM Sederhana',5.23),(2,'Mak Ni',1.10),(3,'RM Goyang Lidah',1.12),(4,'J ONE',0.21),(5,'RM Cahaya',0.13),(6,'Warung Kampus',1.00),(7,'Warung Gang 3',2.13),(8,'Warung Abah',1.30);
 /*!40000 ALTER TABLE `tbl_rumahmakan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -740,4 +741,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24 20:11:54
+-- Dump completed on 2019-04-24 20:38:32
