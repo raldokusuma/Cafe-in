@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<div id="shopping-cart" style="width: 45%; float: left; padding: 20px;">
+	<div id="shopping-cart" style="width: 100%; float: left; padding: 20px;">
         <table cellpadding="10" cellspacing="1" >
             <thead>
                 <tr>
@@ -29,7 +29,7 @@
             	$idd=$_GET['order_id'];
                 $stat=array();
                 ?>
-                	<div class="txt-heading">Pesanan Anda</div>
+                	<div class="txt-heading"><a href="rumahmakan.php" id="btnBack">kembali</a><center>Pesanan Anda</center></div>
                 <?php
                 	$queryc = "CALL sp_lihatpesan('$idd')";
     				$pemesanan = mysqli_query($con, $queryc);

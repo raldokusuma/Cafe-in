@@ -1,5 +1,5 @@
 <?php
-$con=mysqli_connect("127.0.0.1","raldo","raldo123","cafein");
+$con=mysqli_connect("127.0.0.1","khawari","khawari","cafein");
 // Check connection
 if (mysqli_connect_errno())
   {

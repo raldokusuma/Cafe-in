@@ -69,7 +69,7 @@ switch($_GET["action"]) {
     <link href="https://fonts.googleapis.com/css?family=Oxygen:400,300,700" rel="stylesheet" type="text/css"/>
     <link href="https://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" /> -->
     <link href="css/theme.css" media="all" rel="stylesheet" type="text/css" />
     <title>Makan</title>
     <title>User Web</title>
@@ -77,7 +77,7 @@ switch($_GET["action"]) {
 <body>
     <div style="width: 100%;">
         <div id="product-grid" style="width: 50%; float: left; padding: 20px;">
-            <ul><li class="allmenu"><a href="">Tempat Makan</a></li></ul>
+            <ul class="menu"><li class="allmenu"><a href="">Tempat Makan</a></li></ul>
             <?php
                 include '_con2.php';
                 if (isset($_GET['view'])) {
