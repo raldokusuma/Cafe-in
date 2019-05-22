@@ -58,7 +58,7 @@
   <div class="modal-content">
 
     <span class="close">&times;</span>
-    <p style="color: black; text-align: center;"><strong style="font-size: 30px">Cafe-in v1.0 Tutorial</strong></p>
+    <p style="color: black; text-align: center;"><strong style="font-size: 30px">Tahfaz</strong></p>
     <br>
     <div class="row">
       <div class="col-sm-6">
